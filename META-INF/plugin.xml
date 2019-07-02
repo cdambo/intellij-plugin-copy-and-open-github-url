@@ -60,6 +60,15 @@
             <add-to-group group-id="EditorTabPopupMenu"/>
             <add-to-group group-id="ConsoleEditorPopupMenu"/>
         </action>
+        <action id="com.squareup.intellij.GithubCopyUrlForFile"
+                class="com.squareup.intellij.GithubCopyUrlForFile"
+                text="Copy url Github (master)"
+                description="Copy the URL to this file in Github, assuming the master branch">
+            <add-to-group group-id="EditorPopupMenu"/>
+            <add-to-group group-id="ProjectViewPopupMenu"/>
+            <add-to-group group-id="EditorTabPopupMenu"/>
+            <add-to-group group-id="ConsoleEditorPopupMenu"/>
+        </action>
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">

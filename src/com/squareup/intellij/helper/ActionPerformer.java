@@ -34,7 +34,7 @@ public class ActionPerformer {
    * By design it does not support: branches, folders, or multiple files selected (it picks the
    * 1st).
    */
-  public void actionPerformed(AnActionEvent event) {
+  public void actionPerformed(AnActionEvent event, boolean copyOnly) {
     final Editor editor = event.getData(PlatformDataKeys.EDITOR);
     final VirtualFile file = event.getData(PlatformDataKeys.VIRTUAL_FILE);
     Integer line = (editor != null)
@@ -43,8 +43,19 @@ public class ActionPerformer {
         ? editor.visualToLogicalPosition(
         editor.getSelectionModel().getSelectionStartPosition()).line + 1 : null;
     String url = copyUrl(file, line);
-    openBrowser(url);
+    if (!copyOnly) openBrowser(url);
     showStatusBubble(event, file);
+  }
+
+  /**
+   * MVP: copies current file name. then appropriate github prefix. If a line is selected, it
+   * supports that in the URL, too.
+   *
+   * By design it does not support: branches, folders, or multiple files selected (it picks the
+   * 1st).
+   */
+  public void actionPerformed(AnActionEvent event) {
+    actionPerformed(event, false);
   }
 
   private String copyUrl(VirtualFile file, Integer line) {
